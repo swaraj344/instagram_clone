@@ -5,22 +5,34 @@
   "license": "MIT",
   "scripts": {
     "start": "node build/index.js",
-    "dev": "tsc-watch --onSuccess \"npm start\""
+    "dev": "tsc-watch --onSuccess \"npm start\"",
+    "local": "dotenv -c local -- npm run prisma:generate && concurrently \"serverless offline --stage local --disableCookieValidation\"",
+    "migrate:latest": "dotenv -c local -- prisma migrate deploy",
+    "prisma:migrate:local": "dotenv -c local -- prisma migrate dev",
+    "prisma:generate": "prisma generate",
+    "prisma:studio": "dotenv -c local -- prisma studio"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.5",
-    "@types/node": "^20.10.6",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.3.0",
+    "esbuild": "^0.19.11",
     "prisma": "^5.7.1",
-    "ts-node": "^10.9.2",
-    "tsc-watch": "^6.0.4",
+    "serverless": "^3.38.0",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-esbuild": "^1.50.1",
+    "serverless-offline": "^13.3.2",
+    "serverless-prune-plugin": "^2.0.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "@apollo/server": "^4.10.0",
+    "@as-integrations/aws-lambda": "^3.1.0",
     "@prisma/client": "^5.7.1",
     "express": "^4.18.2",
     "graphql": "^16.8.1",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "nanoid": "^5.0.4"
   }
 }

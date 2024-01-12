@@ -1,6 +1,6 @@
 import { mutations } from "./mutations";
 import { queries } from "./queries";
 import { resolvers } from "./resolvers";
-import { typeDefs } from "./typedef";
+import { types } from "./type";
 
-export const User = { typeDefs, queries, mutations, resolvers };
+export const User = { types, queries, mutations, resolvers };

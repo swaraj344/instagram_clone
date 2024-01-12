@@ -1,6 +1,14 @@
 import { createHmac, randomBytes } from "crypto";
 import { prismaClient } from "../lib/db";
 import JWT from "jsonwebtoken";
+import { UserRole } from "@prisma/client";
+import BadRequestError from "../errors/BadRequestError";
+
+export interface UserJWTPayload {
+  id: string;
+  email: string;
+  role: UserRole;
+}
 
 export interface CreateUserPayload {
   userName: string;
@@ -15,52 +23,66 @@ export interface GetUserTokenPayload {
   email: string;
   password: string;
 }
-const JWT_SECRET = "SUPERSTRONGAPP";
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 class UserServices {
-  private static async getUserByEmail(email: string) {
+  public static createUser = prismaClient.user.create;
+  public static getUserById(id: string) {
+    return prismaClient.user.findUnique({ where: { id } });
+  }
+  public static async getUserByEmail(email: string) {
     return await prismaClient.user.findUnique({ where: { email } });
   }
 
-  private static generateHash(salt: string, password: string) {
-    const hashedPassword = createHmac("sha256", salt)
+  public static async signinWithEmailAndPassword(
+    email: string,
+    password: string
+  ) {
+    const user = await this.getUserByEmail(email);
+    if (!user)
+      throw new BadRequestError(`User with email ${email} does not exists!`);
+
+    if (user.authenticationType !== "EMAIL_PASSWORD")
+      throw new BadRequestError(`Invalid Authentication Method`);
+
+    const userSalt = user.salt;
+
+    if (!userSalt)
+      throw new BadRequestError(
+        `Something went wrong with salt! Please contact site admin`
+      );
+
+    const hashPassword = createHmac("sha256", userSalt)
       .update(password)
       .digest("hex");
-    return hashedPassword;
+
+    if (user.password !== hashPassword)
+      throw new BadRequestError(`Invalid email or password!`);
+
+    return this.generateTokenForUser(user.email);
   }
 
-  public static createUser(payload: CreateUserPayload) {
-    const { email, fullName, password, userName, bio, phoneNumber } = payload;
-    const salt = randomBytes(32).toString("hex");
-    const hashedPassword = UserServices.generateHash(salt, password);
-    return prismaClient.user.create({
-      data: {
-        email,
-        fullName,
-        password: hashedPassword,
-        userName,
-        bio,
-        phoneNumber,
-        salt,
-      },
-    });
-  }
+  public static async generateTokenForUser(email: string) {
+    const user = await this.getUserByEmail(email);
+    if (!user) throw new BadRequestError(`user with ${email} does not exists`);
 
-  public static async getUserToken(payload: GetUserTokenPayload) {
-    const { email, password } = payload;
-    const user = await UserServices.getUserByEmail(email);
-    if (!user) {
-      throw new Error("User Not Found");
-    }
-    const userSalt = user.salt;
-    const userHashPassword = UserServices.generateHash(userSalt, password);
-    if (userHashPassword !== user.password) {
-      throw new Error("Incorrect Password");
-    }
+    const payload: UserJWTPayload = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    };
 
-    // Gen Token
-    const token = JWT.sign({ id: user.id, email: user.email }, JWT_SECRET);
+    const token = JWT.sign(payload, JWT_SECRET as string);
     return token;
+  }
+
+  public static verifyToken(token: string) {
+    try {
+      return JWT.verify(token, JWT_SECRET as string) as UserJWTPayload;
+    } catch (error) {
+      return null;
+    }
   }
 }
 

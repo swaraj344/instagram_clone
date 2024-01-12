@@ -10,16 +10,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum AuthenticationType {
+  EMAIL_PASSWORD
+  GOOGLE
+  FACEBOOK
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
 model User {
-  id              String  @id @default(uuid())
-  fullName        String  @map("full_name")
-  userName        String  @unique @map("user_name")
-  email           String  @unique
-  phoneNumber     String? @map("phone_number")
-  password        String
-  salt            String
-  profileImageUrl String? @map("profile_image_url")
-  bio             String?
+  id                 String             @id @default(uuid())
+  fullName           String             @map("full_name")
+  userName           String             @unique @map("user_name")
+  email              String             @unique
+  emailVerified      Boolean            @default(false) @map("email_verified")
+  phoneNumber        String?            @map("phone_number")
+  password           String
+  salt               String
+  profileImageUrl    String?            @map("profile_image_url")
+  bio                String?
+  authenticationType AuthenticationType @map("authentication_type")
+  role               UserRole           @default(USER)
+  createdAt          DateTime           @default(now()) @map("created_at")
+  updatedAt          DateTime           @updatedAt @map("updated_at")
 
   @@map("users")
 }
