@@ -1,0 +1,12 @@
+query SignInWithEmailAndPassword($email: String!, $password: String) {
+  singinwithEmailPassword(email: $email,password: $password)
+}
+
+query GetSessionUser {
+  getSessionUser {
+    id
+    fullName
+    email
+    userName
+  }
+}
