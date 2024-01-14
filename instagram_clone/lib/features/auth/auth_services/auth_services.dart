@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:instagram_clone/core/env.dart';
+import 'package:instagram_clone/core/extensions.dart';
 import 'package:instagram_clone/core/failures/failures.dart';
 import 'package:instagram_clone/core/form_util_extension.dart';
 import 'package:instagram_clone/features/auth/auth_services/i_auth_services.dart';
@@ -67,11 +68,7 @@ class AuthService extends IAuthServices {
   }
 
   Future<void> _createAuthSession(String token) async {
-    if (_environmentConfig.env == ENV.production) {
-      await _secureStorage.write(key: 'token', value: token);
-    } else {
-      await _secureStorage.write(key: 'token-dev', value: token);
-    }
+    await _secureStorage.setToken(token);
     Modular.replaceInstance<GraphQLClient>(
         await getGraphQlClient(_environmentConfig, _secureStorage));
     Modular.replaceInstance<IAuthServices>(
@@ -90,5 +87,14 @@ class AuthService extends IAuthServices {
     print((Modular.get<GraphQLClient>().link as HttpLink).defaultHeaders);
 
     // print(await getGraphQlClient(_environmentConfig, _secureStorage));
+  }
+
+  Future<bool> hasToken() async {
+    final token = await _secureStorage.getToken();
+    if (token == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

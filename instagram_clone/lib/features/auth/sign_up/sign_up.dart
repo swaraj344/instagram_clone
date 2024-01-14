@@ -206,7 +206,8 @@ class SignUpScreen extends StatelessWidget {
                     height: 20.h,
                   ),
                   FormHelper.button(
-                    onTap: state.isLoading ? null : _signUpCubit.signUpClicked,
+                    isLoading: state.isLoading,
+                    onTap: _signUpCubit.signUpClicked,
                     label: "Sign up",
                   ),
                   SizedBox(

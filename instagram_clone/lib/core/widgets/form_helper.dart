@@ -65,6 +65,7 @@ abstract class FormHelper {
     required VoidCallback? onTap,
     required String label,
     Widget? prefix,
+    bool isLoading = false,
   }) {
     return SizedBox(
       height: 45.h,
@@ -80,14 +81,17 @@ abstract class FormHelper {
             fontWeight: FontWeight.w600,
           ),
         ),
-        onPressed: onTap,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (prefix != null) prefix,
-            Text(label),
-          ],
-        ),
+        onPressed: isLoading ? null : onTap,
+        child: isLoading
+            ? const SizedBox(
+                width: 25, height: 25, child: CircularProgressIndicator())
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (prefix != null) prefix,
+                  Text(label),
+                ],
+              ),
       ),
     );
   }

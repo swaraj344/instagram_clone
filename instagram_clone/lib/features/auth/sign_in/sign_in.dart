@@ -110,10 +110,10 @@ class SignInScreen extends StatelessWidget {
                           SizedBox(
                             height: 30.h,
                           ),
+                          // const LinearProgressIndicator(),
                           FormHelper.button(
-                            onTap: state.isLoading
-                                ? null
-                                : _signInCubit.signInClicked,
+                            isLoading: state.isLoading,
+                            onTap: _signInCubit.signInClicked,
                             label: "Log in",
                           ),
                           SizedBox(

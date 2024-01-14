@@ -35,6 +35,8 @@ class EnvironmentConfig {
 }
 
 extension Environment on ENV {
+  bool get isDev => this == ENV.dev;
+
   String get env {
     switch (this) {
       case ENV.dev:

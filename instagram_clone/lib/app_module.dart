@@ -8,6 +8,9 @@ import 'package:instagram_clone/features/home/home_module.dart';
 import 'package:instagram_clone/graphql/graphql_client.dart';
 import 'package:instagram_clone/splash_screen.dart';
 
+import 'features/auth/auth_services/auth_services.dart';
+import 'features/auth/auth_services/i_auth_services.dart';
+
 class AppModule extends Module {
   static String environment =
       const String.fromEnvironment('ENVIRONMENT', defaultValue: 'DEV');
@@ -27,6 +30,8 @@ class AppModule extends Module {
     i.addSingleton<EnvironmentConfig>(() => _env);
     i.addLazySingleton<FlutterSecureStorage>(() => _secureStorage);
     i.addLazySingleton<GraphQLClient>(() => _client);
+    i.addLazySingleton<IAuthServices>(
+        () => AuthService(i.get(), i.get(), i.get()));
   }
 
   @override

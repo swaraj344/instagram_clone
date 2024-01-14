@@ -15,8 +15,6 @@ class AuthModule extends Module {
 
   @override
   void binds(Injector i) {
-    i.addLazySingleton<IAuthServices>(
-        () => AuthService(i.get(), i.get(), i.get()));
     i.addLazySingleton<SignInCubit>(() => SignInCubit(i.get()));
     i.addLazySingleton<SignUpCubit>(() => SignUpCubit(i.get()));
   }

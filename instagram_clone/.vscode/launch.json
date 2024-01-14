@@ -13,6 +13,8 @@
                 "production",
                 "--dart-define",
                 "ENVIRONMENT=PRODUCTION",
+                "-t",
+                "lib/main_prod.dart"
             ]
         },
         {
@@ -24,6 +26,8 @@
                 "dev",
                 "--dart-define",
                 "ENVIRONMENT=DEV",
+                "-t",
+                "lib/main_dev.dart"
             ]
         },
         {
@@ -42,6 +46,8 @@
                 "production",
                 "--dart-define",
                 "ENVIRONMENT=PRODUCTION",
+                "-t",
+                "lib/main_prod.dart"
             ]
         },
         {
@@ -54,6 +60,8 @@
                 "dev",
                 "--dart-define",
                 "ENVIRONMENT=DEV",
+                "-t",
+                "lib/main_dev.dart"
             ]
         }
     ]
