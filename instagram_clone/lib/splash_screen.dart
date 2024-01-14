@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:graphql/client.dart';
+import 'package:instagram_clone/data/db/database.dart';
+import 'package:instagram_clone/data/graphql/graphql_client.dart';
 import 'package:instagram_clone/features/auth/auth_routes.dart';
 import 'package:instagram_clone/features/auth/auth_services/auth_services.dart';
 import 'package:instagram_clone/features/auth/auth_services/i_auth_services.dart';
@@ -27,11 +30,16 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       completer.complete();
     });
-    final hasToken = await Modular.get<IAuthServices>().hasToken();
+
+    final user =
+        await Modular.get<AppLocalDb>().usersDao.getLoggedInUserFuture();
+
+    // final hasToken = await Modular.get<IAuthServices>().hasToken();
 
     await completer.future;
-    if (hasToken) {
+    if (user != null) {
       Modular.to.navigate(HomeRoutes.base);
+      Modular.replaceInstance(getGraphQlClient(Modular.get(), user.authToken));
     } else {
       Modular.to.navigate(AuthRoutes.base);
     }

@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:instagram_clone/features/home/cubit/home_cubit.dart';
 import 'package:instagram_clone/features/home/home.dart';
 
 class HomeModule extends Module {
@@ -12,7 +13,7 @@ class HomeModule extends Module {
 
   @override
   void binds(Injector i) {
-    // TODO: implement binds
+    i.add(() => HomeCubit());
     super.binds(i);
   }
 }

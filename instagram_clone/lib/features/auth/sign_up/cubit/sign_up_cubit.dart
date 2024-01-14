@@ -1,15 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:instagram_clone/core/form_util_extension.dart';
+import 'package:instagram_clone/data/db/database.dart';
 import 'package:instagram_clone/features/auth/auth_services/i_auth_services.dart';
+import 'package:instagram_clone/features/home/home_routes.dart';
 
 part 'sign_up_state.dart';
 part 'sign_up_cubit.freezed.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   final IAuthServices _authServices;
-  SignUpCubit(this._authServices) : super(SignUpState.initial());
+
+  SignUpCubit(
+    this._authServices,
+  ) : super(SignUpState.initial());
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 

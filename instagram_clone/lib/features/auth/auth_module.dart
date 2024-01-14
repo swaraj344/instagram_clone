@@ -15,7 +15,19 @@ class AuthModule extends Module {
 
   @override
   void binds(Injector i) {
-    i.addLazySingleton<SignInCubit>(() => SignInCubit(i.get()));
-    i.addLazySingleton<SignUpCubit>(() => SignUpCubit(i.get()));
+    i.addLazySingleton<SignInCubit>(() => SignInCubit(i.get(), i.get()),
+        config: BindConfig(
+      onDispose: (value) {
+        value.close();
+      },
+    ));
+    i.addLazySingleton<SignUpCubit>(
+        () => SignUpCubit(
+              i.get(),
+            ), config: BindConfig(
+      onDispose: (value) {
+        value.close();
+      },
+    ));
   }
 }

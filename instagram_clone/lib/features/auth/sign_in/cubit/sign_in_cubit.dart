@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,14 +8,36 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:instagram_clone/core/form_util_extension.dart';
 import 'package:instagram_clone/features/auth/auth_services/i_auth_services.dart';
 
+import '../../../../data/db/database.dart';
+import '../../../home/home_routes.dart';
+
 part 'sign_in_state.dart';
 part 'sign_in_cubit.freezed.dart';
 
 class SignInCubit extends Cubit<SignInState> {
   final IAuthServices _authServices;
-  SignInCubit(this._authServices) : super(SignInState.initial());
+  final AppLocalDb _db;
+  StreamSubscription? _authSubs;
+  SignInCubit(this._authServices, this._db) : super(SignInState.initial()) {
+    authChangeListener();
+  }
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  authChangeListener() {
+    _authSubs = _db.usersDao.getLoggedInUser().listen((user) {
+      if (user != null) {
+        Modular.to.pushNamedAndRemoveUntil(HomeRoutes.base, (p0) => false);
+      }
+    });
+  }
+
+  @override
+  close() async {
+    _authSubs?.cancel();
+    super.close();
+    print("SignInCubit closed");
+  }
 
   initialValue() {
     print(state);
@@ -53,9 +77,9 @@ class SignInCubit extends Cubit<SignInState> {
               emailOrUsernameOrPhone: state.phoneOrEmailOrUserName,
               password: state.password)
           .then((value) {
-        if (value.isRight()) {
-          Modular.to.pushNamedAndRemoveUntil('/', (p0) => false);
-        }
+        // if (value.isRight()) {
+        //   Modular.to.pushNamedAndRemoveUntil('/', (p0) => false);
+        // }
         print(value);
       });
       emit(state.copyWith(isLoading: false));

@@ -7,6 +7,11 @@ query GetSessionUser {
     id
     fullName
     email
+    emailVerified
     userName
+    phoneNumber
+    profileImageURL
+    bio
+    createdAt
   }
 }

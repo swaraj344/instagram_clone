@@ -632,7 +632,42 @@ const documentNodeQueryGetSessionUser = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'emailVerified'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'userName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'phoneNumber'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'profileImageURL'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'bio'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'createdAt'),
             alias: null,
             arguments: [],
             directives: [],
@@ -782,7 +817,12 @@ class Query$GetSessionUser$getSessionUser {
     required this.id,
     required this.fullName,
     required this.email,
+    required this.emailVerified,
     required this.userName,
+    this.phoneNumber,
+    this.profileImageURL,
+    this.bio,
+    this.createdAt,
     this.$__typename = 'User',
   });
 
@@ -791,13 +831,23 @@ class Query$GetSessionUser$getSessionUser {
     final l$id = json['id'];
     final l$fullName = json['fullName'];
     final l$email = json['email'];
+    final l$emailVerified = json['emailVerified'];
     final l$userName = json['userName'];
+    final l$phoneNumber = json['phoneNumber'];
+    final l$profileImageURL = json['profileImageURL'];
+    final l$bio = json['bio'];
+    final l$createdAt = json['createdAt'];
     final l$$__typename = json['__typename'];
     return Query$GetSessionUser$getSessionUser(
       id: (l$id as String),
       fullName: (l$fullName as String),
       email: (l$email as String),
+      emailVerified: (l$emailVerified as bool),
       userName: (l$userName as String),
+      phoneNumber: (l$phoneNumber as String?),
+      profileImageURL: (l$profileImageURL as String?),
+      bio: (l$bio as String?),
+      createdAt: (l$createdAt as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -808,7 +858,17 @@ class Query$GetSessionUser$getSessionUser {
 
   final String email;
 
+  final bool emailVerified;
+
   final String userName;
+
+  final String? phoneNumber;
+
+  final String? profileImageURL;
+
+  final String? bio;
+
+  final String? createdAt;
 
   final String $__typename;
 
@@ -820,8 +880,18 @@ class Query$GetSessionUser$getSessionUser {
     _resultData['fullName'] = l$fullName;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$emailVerified = emailVerified;
+    _resultData['emailVerified'] = l$emailVerified;
     final l$userName = userName;
     _resultData['userName'] = l$userName;
+    final l$phoneNumber = phoneNumber;
+    _resultData['phoneNumber'] = l$phoneNumber;
+    final l$profileImageURL = profileImageURL;
+    _resultData['profileImageURL'] = l$profileImageURL;
+    final l$bio = bio;
+    _resultData['bio'] = l$bio;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -832,13 +902,23 @@ class Query$GetSessionUser$getSessionUser {
     final l$id = id;
     final l$fullName = fullName;
     final l$email = email;
+    final l$emailVerified = emailVerified;
     final l$userName = userName;
+    final l$phoneNumber = phoneNumber;
+    final l$profileImageURL = profileImageURL;
+    final l$bio = bio;
+    final l$createdAt = createdAt;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$fullName,
       l$email,
+      l$emailVerified,
       l$userName,
+      l$phoneNumber,
+      l$profileImageURL,
+      l$bio,
+      l$createdAt,
       l$$__typename,
     ]);
   }
@@ -867,9 +947,34 @@ class Query$GetSessionUser$getSessionUser {
     if (l$email != lOther$email) {
       return false;
     }
+    final l$emailVerified = emailVerified;
+    final lOther$emailVerified = other.emailVerified;
+    if (l$emailVerified != lOther$emailVerified) {
+      return false;
+    }
     final l$userName = userName;
     final lOther$userName = other.userName;
     if (l$userName != lOther$userName) {
+      return false;
+    }
+    final l$phoneNumber = phoneNumber;
+    final lOther$phoneNumber = other.phoneNumber;
+    if (l$phoneNumber != lOther$phoneNumber) {
+      return false;
+    }
+    final l$profileImageURL = profileImageURL;
+    final lOther$profileImageURL = other.profileImageURL;
+    if (l$profileImageURL != lOther$profileImageURL) {
+      return false;
+    }
+    final l$bio = bio;
+    final lOther$bio = other.bio;
+    if (l$bio != lOther$bio) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -904,7 +1009,12 @@ abstract class CopyWith$Query$GetSessionUser$getSessionUser<TRes> {
     String? id,
     String? fullName,
     String? email,
+    bool? emailVerified,
     String? userName,
+    String? phoneNumber,
+    String? profileImageURL,
+    String? bio,
+    String? createdAt,
     String? $__typename,
   });
 }
@@ -926,7 +1036,12 @@ class _CopyWithImpl$Query$GetSessionUser$getSessionUser<TRes>
     Object? id = _undefined,
     Object? fullName = _undefined,
     Object? email = _undefined,
+    Object? emailVerified = _undefined,
     Object? userName = _undefined,
+    Object? phoneNumber = _undefined,
+    Object? profileImageURL = _undefined,
+    Object? bio = _undefined,
+    Object? createdAt = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetSessionUser$getSessionUser(
@@ -937,9 +1052,22 @@ class _CopyWithImpl$Query$GetSessionUser$getSessionUser<TRes>
         email: email == _undefined || email == null
             ? _instance.email
             : (email as String),
+        emailVerified: emailVerified == _undefined || emailVerified == null
+            ? _instance.emailVerified
+            : (emailVerified as bool),
         userName: userName == _undefined || userName == null
             ? _instance.userName
             : (userName as String),
+        phoneNumber: phoneNumber == _undefined
+            ? _instance.phoneNumber
+            : (phoneNumber as String?),
+        profileImageURL: profileImageURL == _undefined
+            ? _instance.profileImageURL
+            : (profileImageURL as String?),
+        bio: bio == _undefined ? _instance.bio : (bio as String?),
+        createdAt: createdAt == _undefined
+            ? _instance.createdAt
+            : (createdAt as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -956,7 +1084,12 @@ class _CopyWithStubImpl$Query$GetSessionUser$getSessionUser<TRes>
     String? id,
     String? fullName,
     String? email,
+    bool? emailVerified,
     String? userName,
+    String? phoneNumber,
+    String? profileImageURL,
+    String? bio,
+    String? createdAt,
     String? $__typename,
   }) =>
       _res;
