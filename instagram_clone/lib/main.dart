@@ -7,5 +7,8 @@ import 'app_widget.dart';
 Future<void> main() async {
   await AppModule.initialize();
   Modular.setInitialRoute('/splash');
-  runApp(ModularApp(module: AppModule(), child: const AppWidget()));
+  runApp(ModularApp(
+    module: AppModule(),
+    child: const AppWidget(),
+  ));
 }

@@ -16,3 +16,20 @@
 //         : await write(key: 'token', value: token);
 //   }
 // }
+
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+extension UtilIntExtension on int {
+  SizedBox get width {
+    return SizedBox(
+      width: sp,
+    );
+  }
+
+  SizedBox get height {
+    return SizedBox(
+      height: sp,
+    );
+  }
+}

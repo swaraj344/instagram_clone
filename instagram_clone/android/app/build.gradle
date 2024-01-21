@@ -58,6 +58,21 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "app"
+    productFlavors {
+        dev {
+            dimension "app"
+            applicationId "com.example.instagram_clone"
+            resValue "string", "app_name", "instagram dev"
+            applicationIdSuffix ".dev"
+        }
+        production {
+            dimension "app"
+            applicationId "com.example.instagram_clone"
+            applicationIdSuffix ""
+        }
+    }
 }
 
 flutter {

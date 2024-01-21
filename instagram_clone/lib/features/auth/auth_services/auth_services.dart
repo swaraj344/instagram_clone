@@ -16,6 +16,7 @@ class AuthService extends IAuthServices {
 
   final EnvironmentConfig _environmentConfig;
   final AppLocalDb _db;
+  bool isAuthenticated = false;
 
   AuthService(this._qlClient, this._environmentConfig, this._db);
   @override
@@ -65,6 +66,7 @@ class AuthService extends IAuthServices {
       await _createAuthSession(res.parsedData!.singinwithEmailPassword!);
       return right(unit);
     }
+    print(res);
     return left(const InfraFailure.serverError());
   }
 
@@ -96,6 +98,18 @@ class AuthService extends IAuthServices {
     final user = await _db.usersDao.getLoggedInUserFuture();
     if (user != null) {
       _db.usersDao.deleteUserSession(user.id);
+    }
+  }
+
+  @override
+  Future<bool> hasAuthSession() async {
+    final user = await _db.usersDao.getLoggedInUserFuture();
+    if (user != null) {
+      Modular.replaceInstance(getGraphQlClient(Modular.get(), user.authToken));
+      // isAuthenticated = true;
+      return true;
+    } else {
+      return false;
     }
   }
 }

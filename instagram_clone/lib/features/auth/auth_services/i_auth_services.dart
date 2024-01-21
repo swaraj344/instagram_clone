@@ -12,4 +12,5 @@ abstract class IAuthServices {
   Future<Either<InfraFailure, Unit>> signIn(
       {required String emailOrUsernameOrPhone, required String password});
   signOut();
+  Future<bool> hasAuthSession();
 }

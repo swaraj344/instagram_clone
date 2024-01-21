@@ -11,6 +11,7 @@ class AppWidget extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'My Smart App',
         theme:
             ThemeData(primarySwatch: Colors.blue, fontFamily: FontFamily.inter),
