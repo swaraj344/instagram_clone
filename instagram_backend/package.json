@@ -6,11 +6,13 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "tsc-watch --onSuccess \"npm start\"",
-    "local": "dotenv -c local -- npm run prisma:generate && concurrently \"serverless offline --stage local --disableCookieValidation\"",
+    "local": "dotenv -c local -- npm run prisma:generate && concurrently \"serverless offline --stage local --disableCookieValidation -o 0.0.0.0\"",
     "migrate:latest": "dotenv -c local -- prisma migrate deploy",
+    "migrate:latest:prod": "dotenv -c production -- prisma migrate deploy",
     "prisma:migrate:local": "dotenv -c local -- prisma migrate dev",
     "prisma:generate": "prisma generate",
-    "prisma:studio": "dotenv -c local -- prisma studio"
+    "prisma:studio": "dotenv -c local -- prisma studio",
+    "prisma:studio:prod": "dotenv -c production -- prisma studio"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.5",
@@ -29,6 +31,8 @@
   "dependencies": {
     "@apollo/server": "^4.10.0",
     "@as-integrations/aws-lambda": "^3.1.0",
+    "@aws-sdk/client-s3": "^3.513.0",
+    "@aws-sdk/s3-request-presigner": "^3.513.0",
     "@prisma/client": "^5.7.1",
     "express": "^4.18.2",
     "graphql": "^16.8.1",

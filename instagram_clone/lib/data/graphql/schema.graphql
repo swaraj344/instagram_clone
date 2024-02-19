@@ -1,25 +1,10 @@
-# Exposes a URL that specifies the behavior of this scalar.
-directive @specifiedBy(
-  # The URL that specifies the behavior of this scalar.
-  url: String!
-) on SCALAR
+scalar Date
+
 input CreateUserData {
   userName: String!
   fullName: String
   email: String!
   password: String!
-}
-
-scalar Date
-
-type Mutation {
-  createUser(data: CreateUserData!): User
-}
-
-type Query {
-  getSessionUser: User
-  verifyGoogleAuthToken(googleToken: String!): String
-  singinwithEmailPassword(email: String!, password: String): String
 }
 
 type User {
@@ -37,3 +22,13 @@ type User {
   updatedAt: Date
 }
 
+type Query {
+  getSessionUser: User
+  verifyGoogleAuthToken(googleToken: String!): String
+  singinwithEmailPassword(email: String!, password: String): String
+  getPreSignedUrlForImageUpload: String
+}
+
+type Mutation {
+  createUser(data: CreateUserData!): User
+}

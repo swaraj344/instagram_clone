@@ -1,5 +1,5 @@
 query SignInWithEmailAndPassword($email: String!, $password: String) {
-  singinwithEmailPassword(email: $email,password: $password)
+  singinwithEmailPassword(email: $email, password: $password)
 }
 
 query GetSessionUser {
@@ -14,4 +14,8 @@ query GetSessionUser {
     bio
     createdAt
   }
+}
+
+query GetPreSignedUrlForImageUpload {
+  getPreSignedUrlForImageUpload
 }

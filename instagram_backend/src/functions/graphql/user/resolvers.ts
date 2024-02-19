@@ -42,6 +42,15 @@ const queries = {
     // const token = await UserService.generateTokenForUser(email);
     // return token;
   },
+  getPreSignedUrlForImageUpload: async (
+    _: any,
+    agrs: any,
+    ctx: ServerContext
+  ) => {
+    if (!ctx.user) return null;
+    const url = UserServices.getImageUploadSignedUrl(ctx.user.id);
+    return url;
+  },
 };
 const mutations = {
   createUser: async (

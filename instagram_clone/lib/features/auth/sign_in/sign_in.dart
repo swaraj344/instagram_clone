@@ -52,145 +52,148 @@ class SignInScreen extends StatelessWidget {
               builder: (context, state) {
                 return Expanded(
                   child: Center(
-                    child: Form(
-                      key: _signInCubit.formKey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SvgPicture.asset(
-                            Assets.svg.instagramLogo,
-                            width: 182.w,
-                            height: 49.h,
-                          ),
-                          SizedBox(
-                            height: 40.h,
-                          ),
-                          FormHelper.input(
-                            autovalidateMode: _signInCubit.state.showError
-                                ? AutovalidateMode.always
-                                : AutovalidateMode.disabled,
-                            validator:
-                                _signInCubit.validateEmailUserNameOrPhoneField,
-                            hintText: "Phone number, email or username",
-                            onChange:
-                                _signInCubit.onEmailUserNameOrPhoneFieldChange,
-                          ),
-                          SizedBox(
-                            height: 12.h,
-                          ),
-                          FormHelper.input(
-                            autovalidateMode: _signInCubit.state.showError
-                                ? AutovalidateMode.always
-                                : AutovalidateMode.disabled,
-                            validator: _signInCubit.validatePassword,
-                            hintText: "Password",
-                            onSuffixIconClick:
-                                _signInCubit.togglePasswordVisibility,
-                            onChange: _signInCubit.onPasswordFieldChange,
-                            suffixIcon: state.showpassword
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            obscureText: !state.showpassword,
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              "Forgot password?",
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.primary,
-                              ),
-                              textAlign: TextAlign.right,
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: _signInCubit.formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SvgPicture.asset(
+                              Assets.svg.instagramLogo,
+                              width: 182.w,
+                              height: 49.h,
                             ),
-                          ),
-                          SizedBox(
-                            height: 30.h,
-                          ),
-                          // const LinearProgressIndicator(),
-                          FormHelper.button(
-                            isLoading: state.isLoading,
-                            onTap: _signInCubit.signInClicked,
-                            label: "Log in",
-                          ),
-                          SizedBox(
-                            height: 38.5.h,
-                          ),
-                          InkWell(
-                            onTap: _signInCubit.signInClicked,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                SvgPicture.asset(Assets.svg.facebook),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Text(
-                                  "Log in with Facebook",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.primary,
-                                  ),
-                                )
-                              ],
+                            SizedBox(
+                              height: 40.h,
                             ),
-                          ),
-                          SizedBox(
-                            height: 40.h,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                  child: Divider(
-                                color: const Color.fromARGB(51, 0, 0, 0),
-                                endIndent: 30.w,
-                              )),
-                              Text(
-                                "OR",
+                            FormHelper.input(
+                              autovalidateMode: _signInCubit.state.showError
+                                  ? AutovalidateMode.always
+                                  : AutovalidateMode.disabled,
+                              validator: _signInCubit
+                                  .validateEmailUserNameOrPhoneField,
+                              hintText: "Phone number, email or username",
+                              onChange: _signInCubit
+                                  .onEmailUserNameOrPhoneFieldChange,
+                            ),
+                            SizedBox(
+                              height: 12.h,
+                            ),
+                            FormHelper.input(
+                              autovalidateMode: _signInCubit.state.showError
+                                  ? AutovalidateMode.always
+                                  : AutovalidateMode.disabled,
+                              validator: _signInCubit.validatePassword,
+                              hintText: "Password",
+                              onSuffixIconClick:
+                                  _signInCubit.togglePasswordVisibility,
+                              onChange: _signInCubit.onPasswordFieldChange,
+                              suffixIcon: state.showpassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              obscureText: !state.showpassword,
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                "Forgot password?",
                                 style: TextStyle(
                                   fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color.fromARGB(102, 0, 0, 0),
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.primary,
                                 ),
+                                textAlign: TextAlign.right,
                               ),
-                              Expanded(
-                                child: Divider(
-                                  color: const Color.fromARGB(51, 0, 0, 0),
-                                  indent: 30.w,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 41,
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                              children: [
-                                const TextSpan(
-                                    text: "Don’t have an account? ",
+                            ),
+                            SizedBox(
+                              height: 30.h,
+                            ),
+                            // const LinearProgressIndicator(),
+                            FormHelper.button(
+                              isLoading: state.isLoading,
+                              onTap: _signInCubit.signInClicked,
+                              label: "Log in",
+                            ),
+                            SizedBox(
+                              height: 38.5.h,
+                            ),
+                            InkWell(
+                              onTap: _signInCubit.signInClicked,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SvgPicture.asset(Assets.svg.facebook),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Text(
+                                    "Log in with Facebook",
                                     style: TextStyle(
-                                        color: Color.fromARGB(102, 0, 0, 0))),
-                                TextSpan(
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Modular.to.pushNamed(SignUpRoute.base);
-                                      },
-                                    text: "Sign up.",
-                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
                                       color: AppColors.primary,
-                                    ))
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 40.h,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: Divider(
+                                  color: const Color.fromARGB(51, 0, 0, 0),
+                                  endIndent: 30.w,
+                                )),
+                                Text(
+                                  "OR",
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color.fromARGB(102, 0, 0, 0),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Divider(
+                                    color: const Color.fromARGB(51, 0, 0, 0),
+                                    indent: 30.w,
+                                  ),
+                                ),
                               ],
                             ),
-                          )
-                        ],
+                            const SizedBox(
+                              height: 41,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                                children: [
+                                  const TextSpan(
+                                      text: "Don’t have an account? ",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(102, 0, 0, 0))),
+                                  TextSpan(
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          Modular.to
+                                              .pushNamed(SignUpRoute.base);
+                                        },
+                                      text: "Sign up.",
+                                      style: const TextStyle(
+                                        color: AppColors.primary,
+                                      ))
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

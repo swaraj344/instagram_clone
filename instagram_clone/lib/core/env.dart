@@ -26,7 +26,9 @@ class EnvironmentConfig {
         );
       case ENV.dev:
         return EnvironmentConfig._(
-          apiUrl: "http://10.0.2.2:8000/local/graphql",
+          apiUrl: Platform.isAndroid
+              ? "http://10.0.2.2:8000/local/graphql"
+              : "http://localhost:8000/local/graphql",
           env: env,
           deviceType: Platform.isIOS ? DeviceType.ios : DeviceType.android,
         );

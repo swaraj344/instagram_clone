@@ -22,7 +22,7 @@ class _PostWidgetState extends State<PostWidget>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: 400.milliseconds,
+      duration: 200.milliseconds,
       reverseDuration: 300.milliseconds,
     );
     super.initState();
@@ -153,13 +153,13 @@ class _LikeAnimationWrapperState extends State<LikeAnimationWrapper> {
               ScaleTransition(
                 scale: animation,
                 child: AnimatedOpacity(
-                  duration: 250.milliseconds,
+                  duration: 100.milliseconds,
                   curve: Curves.easeInOut,
                   opacity: _animationController.isAnimating ? 1 : 0,
                   child: Icon(
                     Icons.favorite,
                     color: Colors.white.withOpacity(0.8),
-                    size: 80,
+                    size: 100,
                   ),
                 ),
               ),

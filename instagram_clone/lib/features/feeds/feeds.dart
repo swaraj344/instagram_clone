@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/core/colors.dart';
 import 'package:instagram_clone/core/gen/assets.gen.dart';
 import 'package:instagram_clone/core/widgets/components/post/post.dart';
 import 'package:instagram_clone/core/widgets/profile_avatar.dart';
+import 'package:instagram_clone/features/add_post/add_post_services.dart/add_post_service.dart';
 
 class FeedsScreen extends StatelessWidget {
   const FeedsScreen({super.key});
@@ -18,15 +20,19 @@ class FeedsScreen extends StatelessWidget {
           slivers: [
             SliverAppBar(
               backgroundColor: Colors.white,
+              surfaceTintColor: Colors.white,
               floating: true,
               forceElevated: true,
-              elevation: 1,
+              elevation: 3,
               title: SvgPicture.asset(
                 Assets.svg.instagramLogo,
                 width: 104.w,
               ),
               actions: [
                 InkWell(
+                  onTap: () {
+                    AddPostService(Modular.get()).getSelfSignedUrl();
+                  },
                   child: SizedBox(
                     child: SvgPicture.asset(
                       Assets.svg.icons.heart,

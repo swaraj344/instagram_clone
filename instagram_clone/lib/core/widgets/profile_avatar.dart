@@ -140,9 +140,7 @@ class GradientBorder extends Border {
     return GradientBorder._fromUniform(gradient, width);
   }
 
-  const GradientBorder._fromUniform(Gradient gradient, double width)
-      : assert(gradient != null),
-        assert(width >= 0.0),
-        borderGradient = gradient,
-        width = width;
+  const GradientBorder._fromUniform(Gradient gradient, this.width)
+      : assert(width >= 0.0),
+        borderGradient = gradient;
 }

@@ -92,6 +92,7 @@ out
 dist
 build
 .esbuild
+.esbuild/
 
 # Gatsby files
 .cache/

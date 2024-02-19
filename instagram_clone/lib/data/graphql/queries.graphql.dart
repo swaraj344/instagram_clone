@@ -1094,3 +1094,294 @@ class _CopyWithStubImpl$Query$GetSessionUser$getSessionUser<TRes>
   }) =>
       _res;
 }
+
+class Query$GetPreSignedUrlForImageUpload {
+  Query$GetPreSignedUrlForImageUpload({
+    this.getPreSignedUrlForImageUpload,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$GetPreSignedUrlForImageUpload.fromJson(
+      Map<String, dynamic> json) {
+    final l$getPreSignedUrlForImageUpload =
+        json['getPreSignedUrlForImageUpload'];
+    final l$$__typename = json['__typename'];
+    return Query$GetPreSignedUrlForImageUpload(
+      getPreSignedUrlForImageUpload:
+          (l$getPreSignedUrlForImageUpload as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? getPreSignedUrlForImageUpload;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$getPreSignedUrlForImageUpload = getPreSignedUrlForImageUpload;
+    _resultData['getPreSignedUrlForImageUpload'] =
+        l$getPreSignedUrlForImageUpload;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$getPreSignedUrlForImageUpload = getPreSignedUrlForImageUpload;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$getPreSignedUrlForImageUpload,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetPreSignedUrlForImageUpload) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$getPreSignedUrlForImageUpload = getPreSignedUrlForImageUpload;
+    final lOther$getPreSignedUrlForImageUpload =
+        other.getPreSignedUrlForImageUpload;
+    if (l$getPreSignedUrlForImageUpload !=
+        lOther$getPreSignedUrlForImageUpload) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetPreSignedUrlForImageUpload
+    on Query$GetPreSignedUrlForImageUpload {
+  CopyWith$Query$GetPreSignedUrlForImageUpload<
+          Query$GetPreSignedUrlForImageUpload>
+      get copyWith => CopyWith$Query$GetPreSignedUrlForImageUpload(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetPreSignedUrlForImageUpload<TRes> {
+  factory CopyWith$Query$GetPreSignedUrlForImageUpload(
+    Query$GetPreSignedUrlForImageUpload instance,
+    TRes Function(Query$GetPreSignedUrlForImageUpload) then,
+  ) = _CopyWithImpl$Query$GetPreSignedUrlForImageUpload;
+
+  factory CopyWith$Query$GetPreSignedUrlForImageUpload.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetPreSignedUrlForImageUpload;
+
+  TRes call({
+    String? getPreSignedUrlForImageUpload,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetPreSignedUrlForImageUpload<TRes>
+    implements CopyWith$Query$GetPreSignedUrlForImageUpload<TRes> {
+  _CopyWithImpl$Query$GetPreSignedUrlForImageUpload(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetPreSignedUrlForImageUpload _instance;
+
+  final TRes Function(Query$GetPreSignedUrlForImageUpload) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? getPreSignedUrlForImageUpload = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetPreSignedUrlForImageUpload(
+        getPreSignedUrlForImageUpload:
+            getPreSignedUrlForImageUpload == _undefined
+                ? _instance.getPreSignedUrlForImageUpload
+                : (getPreSignedUrlForImageUpload as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetPreSignedUrlForImageUpload<TRes>
+    implements CopyWith$Query$GetPreSignedUrlForImageUpload<TRes> {
+  _CopyWithStubImpl$Query$GetPreSignedUrlForImageUpload(this._res);
+
+  TRes _res;
+
+  call({
+    String? getPreSignedUrlForImageUpload,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const documentNodeQueryGetPreSignedUrlForImageUpload =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetPreSignedUrlForImageUpload'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getPreSignedUrlForImageUpload'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Query$GetPreSignedUrlForImageUpload
+    _parserFn$Query$GetPreSignedUrlForImageUpload(Map<String, dynamic> data) =>
+        Query$GetPreSignedUrlForImageUpload.fromJson(data);
+typedef OnQueryComplete$Query$GetPreSignedUrlForImageUpload = FutureOr<void>
+    Function(
+  Map<String, dynamic>?,
+  Query$GetPreSignedUrlForImageUpload?,
+);
+
+class Options$Query$GetPreSignedUrlForImageUpload
+    extends graphql.QueryOptions<Query$GetPreSignedUrlForImageUpload> {
+  Options$Query$GetPreSignedUrlForImageUpload({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetPreSignedUrlForImageUpload? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$GetPreSignedUrlForImageUpload? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Query$GetPreSignedUrlForImageUpload(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryGetPreSignedUrlForImageUpload,
+          parserFn: _parserFn$Query$GetPreSignedUrlForImageUpload,
+        );
+
+  final OnQueryComplete$Query$GetPreSignedUrlForImageUpload?
+      onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
+}
+
+class WatchOptions$Query$GetPreSignedUrlForImageUpload
+    extends graphql.WatchQueryOptions<Query$GetPreSignedUrlForImageUpload> {
+  WatchOptions$Query$GetPreSignedUrlForImageUpload({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetPreSignedUrlForImageUpload? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryGetPreSignedUrlForImageUpload,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$GetPreSignedUrlForImageUpload,
+        );
+}
+
+class FetchMoreOptions$Query$GetPreSignedUrlForImageUpload
+    extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$GetPreSignedUrlForImageUpload(
+      {required graphql.UpdateQuery updateQuery})
+      : super(
+          updateQuery: updateQuery,
+          document: documentNodeQueryGetPreSignedUrlForImageUpload,
+        );
+}
+
+extension ClientExtension$Query$GetPreSignedUrlForImageUpload
+    on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$GetPreSignedUrlForImageUpload>>
+      query$GetPreSignedUrlForImageUpload(
+              [Options$Query$GetPreSignedUrlForImageUpload? options]) async =>
+          await this
+              .query(options ?? Options$Query$GetPreSignedUrlForImageUpload());
+  graphql.ObservableQuery<Query$GetPreSignedUrlForImageUpload>
+      watchQuery$GetPreSignedUrlForImageUpload(
+              [WatchOptions$Query$GetPreSignedUrlForImageUpload? options]) =>
+          this.watchQuery(
+              options ?? WatchOptions$Query$GetPreSignedUrlForImageUpload());
+  void writeQuery$GetPreSignedUrlForImageUpload({
+    required Query$GetPreSignedUrlForImageUpload data,
+    bool broadcast = true,
+  }) =>
+      this.writeQuery(
+        graphql.Request(
+            operation: graphql.Operation(
+                document: documentNodeQueryGetPreSignedUrlForImageUpload)),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Query$GetPreSignedUrlForImageUpload? readQuery$GetPreSignedUrlForImageUpload(
+      {bool optimistic = true}) {
+    final result = this.readQuery(
+      graphql.Request(
+          operation: graphql.Operation(
+              document: documentNodeQueryGetPreSignedUrlForImageUpload)),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Query$GetPreSignedUrlForImageUpload.fromJson(result);
+  }
+}

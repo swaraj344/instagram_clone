@@ -1,6 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:instagram_clone/features/auth/auth_services/auth_services.dart';
-import 'package:instagram_clone/features/auth/auth_services/i_auth_services.dart';
 import 'package:instagram_clone/features/auth/sign_in/cubit/sign_in_cubit.dart';
 import 'package:instagram_clone/features/auth/sign_in/sign_in.dart';
 import 'package:instagram_clone/features/auth/sign_up/cubit/sign_up_cubit.dart';

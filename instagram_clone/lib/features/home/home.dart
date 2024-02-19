@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/core/colors.dart';
 import 'package:instagram_clone/core/gen/assets.gen.dart';
+import 'package:instagram_clone/features/add_post/add_post_routes.dart';
 import 'package:instagram_clone/features/home/home_routes.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -72,6 +73,9 @@ class _BottomBarState extends State<BottomBar> {
               inActiveIcon: Assets.svg.icons.search,
             ),
             BottomBarItem(
+              onTap: () {
+                Modular.to.pushNamed(AddPostRoute.addPost);
+              },
               activeIcon: Assets.svg.icons.add,
               inActiveIcon: Assets.svg.icons.add,
             ),

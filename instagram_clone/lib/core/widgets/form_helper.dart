@@ -73,8 +73,9 @@ abstract class FormHelper {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
+          foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.r),
+            borderRadius: BorderRadius.circular(8.r),
           ),
           textStyle: const TextStyle(
             fontSize: 14,

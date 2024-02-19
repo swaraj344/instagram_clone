@@ -27,7 +27,7 @@ class SignInCubit extends Cubit<SignInState> {
   authChangeListener() {
     _authSubs = _db.usersDao.getLoggedInUser().listen((user) {
       if (user != null) {
-        Modular.to.pushNamedAndRemoveUntil(HomeRoutes.base, (p0) => false);
+        Modular.to.pushNamedAndRemoveUntil(HomeRoutes.feeds, (p0) => false);
       }
     });
   }
