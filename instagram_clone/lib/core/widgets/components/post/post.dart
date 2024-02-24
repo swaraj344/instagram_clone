@@ -7,8 +7,11 @@ import 'package:instagram_clone/core/extensions.dart';
 import 'package:instagram_clone/core/widgets/components/post/post_info.dart';
 import 'package:instagram_clone/core/widgets/profile_avatar.dart';
 
+import '../../../../data/graphql/graphql.dart';
+
 class PostWidget extends StatefulWidget {
-  const PostWidget({super.key});
+  final Query$GetFeeds$getFeeds post;
+  const PostWidget({super.key, required this.post});
 
   @override
   State<PostWidget> createState() => _PostWidgetState();
@@ -45,14 +48,18 @@ class _PostWidgetState extends State<PostWidget>
           ),
           child: Row(
             children: [
-              const ProfileAvatar(
+              ProfileAvatar(
                 radius: 14,
                 padding: 4,
                 showBorder: true,
+                image: widget.post.user.profileImageURL == null
+                    ? null
+                    : CachedNetworkImageProvider(
+                        widget.post.user.profileImageURL!),
               ),
               8.width,
               Text(
-                "Username",
+                widget.post.user.userName,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 12.sp,
@@ -75,12 +82,14 @@ class _PostWidgetState extends State<PostWidget>
           child: AspectRatio(
             aspectRatio: 1,
             child: CachedNetworkImage(
-                imageUrl:
-                    "https://images.unsplash.com/photo-1705642373439-27963d4b9908?q=80&w=512&h=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                imageUrl: widget.post.mediaUrl.isEmpty
+                    ? ""
+                    : widget.post.mediaUrl.first),
           ),
         ),
         PostInfoWidget(
           likeAnimationController: _animationController,
+          post: widget.post,
         ),
       ],
     );

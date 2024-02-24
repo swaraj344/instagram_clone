@@ -6,11 +6,17 @@ import 'package:instagram_clone/core/extensions.dart';
 import 'package:instagram_clone/core/gen/assets.gen.dart';
 import 'package:instagram_clone/core/widgets/profile_avatar.dart';
 
+import '../../../../data/graphql/graphql.dart';
 import 'read_more_text.dart';
 
 class PostInfoWidget extends StatelessWidget {
+  final Query$GetFeeds$getFeeds post;
   final AnimationController likeAnimationController;
-  const PostInfoWidget({super.key, required this.likeAnimationController});
+  const PostInfoWidget({
+    super.key,
+    required this.likeAnimationController,
+    required this.post,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -75,14 +81,14 @@ class PostInfoWidget extends StatelessWidget {
             height: 10.h,
           ),
           Text(
-            "100 Likes",
+            "${post.likeCount} Likes",
             style: TextStyle(
               fontSize: 13.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
           ReadMoreText(
-            'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
+            post.caption ?? "",
             trimLines: 2,
             // colorClickableText: AppColors.textGrey,
             trimMode: TrimMode.Line,
@@ -99,7 +105,7 @@ class PostInfoWidget extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
             // moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            preDataText: "User Name",
+            preDataText: post.user.userName,
             style: TextStyle(
               fontSize: 13.sp,
               color: AppColors.iconColor,
@@ -114,13 +120,14 @@ class PostInfoWidget extends StatelessWidget {
           SizedBox(
             height: 6.h,
           ),
-          Text(
-            "View All 16 Comments",
-            style: TextStyle(
-              color: AppColors.textGrey,
-              fontSize: 14.sp,
+          if (post.commentCount > 0)
+            Text(
+              "View All ${post.commentCount} Comments",
+              style: TextStyle(
+                color: AppColors.textGrey,
+                fontSize: 14.sp,
+              ),
             ),
-          ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 6.h),
             height: 38.h,

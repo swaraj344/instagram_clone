@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,17 +7,24 @@ import 'package:instagram_clone/core/colors.dart';
 import 'package:instagram_clone/core/gen/assets.gen.dart';
 import 'package:instagram_clone/core/widgets/components/post/post.dart';
 import 'package:instagram_clone/core/widgets/profile_avatar.dart';
-import 'package:instagram_clone/features/add_post/add_post_services.dart/add_post_service.dart';
+import 'package:instagram_clone/features/home/cubit/home_cubit.dart';
 
-class FeedsScreen extends StatelessWidget {
-  const FeedsScreen({super.key});
+class FeedsScreen extends StatefulWidget {
+  final HomeCubit _homeCubit;
+  FeedsScreen({super.key}) : _homeCubit = Modular.get();
 
+  @override
+  State<FeedsScreen> createState() => _FeedsScreenState();
+}
+
+class _FeedsScreenState extends State<FeedsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: CustomScrollView(
+          controller: widget._homeCubit.feedScrollController,
           slivers: [
             SliverAppBar(
               backgroundColor: Colors.white,
@@ -31,7 +39,7 @@ class FeedsScreen extends StatelessWidget {
               actions: [
                 InkWell(
                   onTap: () {
-                    AddPostService(Modular.get()).getSelfSignedUrl();
+                    Modular.get<HomeCubit>().refreshFeed();
                   },
                   child: SizedBox(
                     child: SvgPicture.asset(
@@ -98,9 +106,18 @@ class FeedsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SliverList.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) => const PostWidget(),
+            BlocBuilder<HomeCubit, HomeState>(
+              bloc: widget._homeCubit,
+              builder: (context, state) {
+                return SliverList.builder(
+                  itemCount: state.posts.length,
+                  itemBuilder: (context, index) {
+                    return PostWidget(
+                      post: state.posts[index],
+                    );
+                  },
+                );
+              },
             )
           ],
         ),

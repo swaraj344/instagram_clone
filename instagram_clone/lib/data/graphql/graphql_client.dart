@@ -7,7 +7,7 @@ GraphQLClient getGraphQlClient(EnvironmentConfig env, String? token) {
         defaultHeaders:
             token != null ? {"Authorization": "Bearer $token"} : {}),
     cache: GraphQLCache(
-      store: InMemoryStore(),
-    ),
+        // store: InMemoryStore(),
+        ),
   );
 }

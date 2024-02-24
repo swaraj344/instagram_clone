@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:instagram_clone/features/home/cubit/home_cubit.dart';
+import 'package:instagram_clone/features/home/home_routes.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_gallery/photo_gallery.dart';
 import 'package:image/image.dart' as img;
@@ -103,9 +105,21 @@ class AddPostCubit extends Cubit<AddPostState> {
     emit(state.copyWith(caption: value));
   }
 
-  shareClick() {
+  shareClick() async {
     if (state.image != null) {
-      _addPostServices.createPost(caption: "caption", image: state.image!);
+      emit(state.copyWith(isLoading: true));
+      EasyLoading.show(
+          status: "Publishing...", maskType: EasyLoadingMaskType.black);
+      await _addPostServices
+          .createPost(caption: state.caption, image: state.image!)
+          .then((value) {
+        emit(state.copyWith(isLoading: false));
+        if (value.isRight()) {
+          Modular.to.pushNamedAndRemoveUntil(HomeRoutes.feeds, (p0) => false);
+          Modular.tryGet<HomeCubit>()?.refreshFeed();
+        }
+      });
+      EasyLoading.dismiss();
     }
   }
 }

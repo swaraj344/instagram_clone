@@ -21,6 +21,9 @@ export const types = `#graphql
         bio: String
         createdAt: Date
         updatedAt: Date
+        posts:[Post!]!
+        followedBy:[User!]!
+        following:[User!]!
     }
 
 `;

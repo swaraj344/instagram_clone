@@ -172,6 +172,214 @@ class _CopyWithStubImpl$Input$CreateUserData<TRes>
       _res;
 }
 
+class Input$CreatePostData {
+  factory Input$CreatePostData({
+    String? caption,
+    List<String?>? imageUrls,
+    String? location,
+  }) =>
+      Input$CreatePostData._({
+        if (caption != null) r'caption': caption,
+        if (imageUrls != null) r'imageUrls': imageUrls,
+        if (location != null) r'location': location,
+      });
+
+  Input$CreatePostData._(this._$data);
+
+  factory Input$CreatePostData.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('caption')) {
+      final l$caption = data['caption'];
+      result$data['caption'] = (l$caption as String?);
+    }
+    if (data.containsKey('imageUrls')) {
+      final l$imageUrls = data['imageUrls'];
+      result$data['imageUrls'] =
+          (l$imageUrls as List<dynamic>?)?.map((e) => (e as String?)).toList();
+    }
+    if (data.containsKey('location')) {
+      final l$location = data['location'];
+      result$data['location'] = (l$location as String?);
+    }
+    return Input$CreatePostData._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get caption => (_$data['caption'] as String?);
+
+  List<String?>? get imageUrls => (_$data['imageUrls'] as List<String?>?);
+
+  String? get location => (_$data['location'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('caption')) {
+      final l$caption = caption;
+      result$data['caption'] = l$caption;
+    }
+    if (_$data.containsKey('imageUrls')) {
+      final l$imageUrls = imageUrls;
+      result$data['imageUrls'] = l$imageUrls?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('location')) {
+      final l$location = location;
+      result$data['location'] = l$location;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$CreatePostData<Input$CreatePostData> get copyWith =>
+      CopyWith$Input$CreatePostData(
+        this,
+        (i) => i,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$CreatePostData) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$caption = caption;
+    final lOther$caption = other.caption;
+    if (_$data.containsKey('caption') != other._$data.containsKey('caption')) {
+      return false;
+    }
+    if (l$caption != lOther$caption) {
+      return false;
+    }
+    final l$imageUrls = imageUrls;
+    final lOther$imageUrls = other.imageUrls;
+    if (_$data.containsKey('imageUrls') !=
+        other._$data.containsKey('imageUrls')) {
+      return false;
+    }
+    if (l$imageUrls != null && lOther$imageUrls != null) {
+      if (l$imageUrls.length != lOther$imageUrls.length) {
+        return false;
+      }
+      for (int i = 0; i < l$imageUrls.length; i++) {
+        final l$imageUrls$entry = l$imageUrls[i];
+        final lOther$imageUrls$entry = lOther$imageUrls[i];
+        if (l$imageUrls$entry != lOther$imageUrls$entry) {
+          return false;
+        }
+      }
+    } else if (l$imageUrls != lOther$imageUrls) {
+      return false;
+    }
+    final l$location = location;
+    final lOther$location = other.location;
+    if (_$data.containsKey('location') !=
+        other._$data.containsKey('location')) {
+      return false;
+    }
+    if (l$location != lOther$location) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$caption = caption;
+    final l$imageUrls = imageUrls;
+    final l$location = location;
+    return Object.hashAll([
+      _$data.containsKey('caption') ? l$caption : const {},
+      _$data.containsKey('imageUrls')
+          ? l$imageUrls == null
+              ? null
+              : Object.hashAll(l$imageUrls.map((v) => v))
+          : const {},
+      _$data.containsKey('location') ? l$location : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$CreatePostData<TRes> {
+  factory CopyWith$Input$CreatePostData(
+    Input$CreatePostData instance,
+    TRes Function(Input$CreatePostData) then,
+  ) = _CopyWithImpl$Input$CreatePostData;
+
+  factory CopyWith$Input$CreatePostData.stub(TRes res) =
+      _CopyWithStubImpl$Input$CreatePostData;
+
+  TRes call({
+    String? caption,
+    List<String?>? imageUrls,
+    String? location,
+  });
+}
+
+class _CopyWithImpl$Input$CreatePostData<TRes>
+    implements CopyWith$Input$CreatePostData<TRes> {
+  _CopyWithImpl$Input$CreatePostData(
+    this._instance,
+    this._then,
+  );
+
+  final Input$CreatePostData _instance;
+
+  final TRes Function(Input$CreatePostData) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? caption = _undefined,
+    Object? imageUrls = _undefined,
+    Object? location = _undefined,
+  }) =>
+      _then(Input$CreatePostData._({
+        ..._instance._$data,
+        if (caption != _undefined) 'caption': (caption as String?),
+        if (imageUrls != _undefined) 'imageUrls': (imageUrls as List<String?>?),
+        if (location != _undefined) 'location': (location as String?),
+      }));
+}
+
+class _CopyWithStubImpl$Input$CreatePostData<TRes>
+    implements CopyWith$Input$CreatePostData<TRes> {
+  _CopyWithStubImpl$Input$CreatePostData(this._res);
+
+  TRes _res;
+
+  call({
+    String? caption,
+    List<String?>? imageUrls,
+    String? location,
+  }) =>
+      _res;
+}
+
+enum Enum$PostMediaType { IMAGE, VIDEO, $unknown }
+
+String toJson$Enum$PostMediaType(Enum$PostMediaType e) {
+  switch (e) {
+    case Enum$PostMediaType.IMAGE:
+      return r'IMAGE';
+    case Enum$PostMediaType.VIDEO:
+      return r'VIDEO';
+    case Enum$PostMediaType.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$PostMediaType fromJson$Enum$PostMediaType(String value) {
+  switch (value) {
+    case r'IMAGE':
+      return Enum$PostMediaType.IMAGE;
+    case r'VIDEO':
+      return Enum$PostMediaType.VIDEO;
+    default:
+      return Enum$PostMediaType.$unknown;
+  }
+}
+
 enum Enum$__TypeKind {
   SCALAR,
   OBJECT,

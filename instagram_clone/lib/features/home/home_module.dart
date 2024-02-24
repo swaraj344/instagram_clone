@@ -4,6 +4,7 @@ import 'package:instagram_clone/features/feeds/feeds.dart';
 import 'package:instagram_clone/features/home/cubit/home_cubit.dart';
 import 'package:instagram_clone/features/home/home.dart';
 import 'package:instagram_clone/features/home/home_routes.dart';
+import 'package:instagram_clone/features/home/home_services/home_services.dart';
 import 'package:instagram_clone/features/profile/profile.dart';
 import 'package:instagram_clone/features/reels/reels.dart';
 import 'package:instagram_clone/features/search/search.dart';
@@ -17,7 +18,7 @@ class HomeModule extends Module {
       children: [
         ChildRoute(
           HomeRoutes.feeds,
-          child: (_) => const FeedsScreen(),
+          child: (_) => FeedsScreen(),
         ),
         ChildRoute(
           HomeRoutes.search,
@@ -37,7 +38,8 @@ class HomeModule extends Module {
 
   @override
   void binds(Injector i) {
-    i.add(() => HomeCubit());
+    i.add(() => HomeServices(i.get()));
+    i.addLazySingleton(() => HomeCubit(i.get()));
     super.binds(i);
   }
 }

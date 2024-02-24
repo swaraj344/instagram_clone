@@ -1,6 +1,11 @@
-
 mutation RegisterUser($data: CreateUserData!) {
   createUser(data: $data) {
+    id
+  }
+}
+
+mutation CreatePost($data: CreatePostData!) {
+  createPost(data: $data) {
     id
   }
 }

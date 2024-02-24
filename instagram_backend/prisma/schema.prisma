@@ -64,7 +64,6 @@ model Post {
   userId       String        @map("user_id")
   media        PostMedia[]
   comments     Comment[]
-  likes        Like[]
   PostActivity PostActivity?
 }
 
@@ -93,7 +92,11 @@ model Comment {
   commentedById String   @map("commented_by")
   post          Post     @relation(fields: [postId], references: [id])
   postId        String   @map("post_id")
-  Likes         Like[]
+}
+
+enum LikeType {
+  POST
+  COMMENT
 }
 
 model Like {
@@ -102,9 +105,10 @@ model Like {
   updatedAt DateTime @updatedAt @map("updated_at")
   likedBy   User     @relation(fields: [likedById], references: [id])
   likedById String   @map("liked_by")
-  parentId  String?  @map("parent_id")
-  Post      Post?    @relation(fields: [parentId], references: [id], map: "post_like")
-  comment   Comment? @relation(fields: [parentId], references: [id], map: "comment_like")
+  parentId  String // This will store either postId or commentId
+  likeType  LikeType // This will indicate whether the like is for a post or a comment
+
+  @@unique([likedById, parentId, likeType], name: "user_entity_like_unique")
 }
 
 model PostActivity {

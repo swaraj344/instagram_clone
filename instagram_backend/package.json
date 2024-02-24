@@ -12,7 +12,8 @@
     "prisma:migrate:local": "dotenv -c local -- prisma migrate dev",
     "prisma:generate": "prisma generate",
     "prisma:studio": "dotenv -c local -- prisma studio",
-    "prisma:studio:prod": "dotenv -c production -- prisma studio"
+    "prisma:studio:prod": "dotenv -c production -- prisma studio",
+    "deploy":"serverless deploy --stage production"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.5",

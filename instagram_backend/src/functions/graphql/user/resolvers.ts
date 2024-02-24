@@ -4,6 +4,8 @@ import BadRequestError from "../../../errors/BadRequestError";
 import UserServices from "../../../services/user";
 import { ServerContext } from "../interfaces";
 import { CreateUserData } from "./interfaces";
+import { User } from "@prisma/client";
+import PostServices from "../../../services/post";
 
 const queries = {
   getSessionUser: async (_: any, agrs: any, ctx: ServerContext) => {
@@ -42,15 +44,6 @@ const queries = {
     // const token = await UserService.generateTokenForUser(email);
     // return token;
   },
-  getPreSignedUrlForImageUpload: async (
-    _: any,
-    agrs: any,
-    ctx: ServerContext
-  ) => {
-    if (!ctx.user) return null;
-    const url = UserServices.getImageUploadSignedUrl(ctx.user.id);
-    return url;
-  },
 };
 const mutations = {
   createUser: async (
@@ -86,4 +79,21 @@ const mutations = {
   },
 };
 
-export const resolvers = { queries, mutations };
+const users = {
+  posts: async (_: any, __: any, ctx: ServerContext) => {
+    if (!ctx.user) return null;
+    return PostServices.getUserPosts(ctx.user.id);
+  },
+
+  followedBy: async (_: any, __: any, ctx: ServerContext) => {
+    if (!ctx.user) return null;
+    return await UserServices.getFollowers(ctx.user.id);
+  },
+
+  following: async (_: any, __: any, ctx: ServerContext) => {
+    if (!ctx.user) return null;
+    return await UserServices.getFollowings(ctx.user.id);
+  },
+};
+
+export const resolvers = { queries, mutations, users };
