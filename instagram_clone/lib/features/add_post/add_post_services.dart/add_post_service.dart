@@ -42,7 +42,12 @@ class AddPostService extends IAddPostServices {
 
   @override
   Future<String?> getSelfSignedUrl() async {
-    return await _qlClient.query$GetPreSignedUrlForImageUpload().then((value) {
+    return await _qlClient
+        .query$GetPreSignedUrlForImageUpload(
+            Options$Query$GetPreSignedUrlForImageUpload(
+      fetchPolicy: FetchPolicy.noCache,
+    ))
+        .then((value) {
       print(value.parsedData?.getPreSignedUrlForImageUpload);
       print(value.exception);
       return value.parsedData?.getPreSignedUrlForImageUpload;

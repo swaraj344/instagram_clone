@@ -39,7 +39,7 @@ class HomeModule extends Module {
   @override
   void binds(Injector i) {
     i.add(() => HomeServices(i.get()));
-    i.addLazySingleton(() => HomeCubit(i.get()));
+    i.addLazySingleton(() => HomeCubit(i.get(), i.get()));
     super.binds(i);
   }
 }

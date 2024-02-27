@@ -9,3 +9,58 @@ mutation CreatePost($data: CreatePostData!) {
     id
   }
 }
+
+mutation LikePost($postId: ID!) {
+  likePost(postId: $postId) {
+    id
+    caption
+    commentCount
+    likeCount
+    mediaUrl
+    user {
+      id
+      userName
+      fullName
+      profileImageURL
+    }
+    updatedAt
+    liked
+  }
+}
+
+mutation UnLikePost($postId: ID!) {
+  unLikePost(postId: $postId) {
+    id
+    caption
+    commentCount
+    likeCount
+    mediaUrl
+    user {
+      id
+      userName
+      fullName
+      profileImageURL
+    }
+    updatedAt
+    liked
+  }
+}
+
+mutation DeletePost($postId: ID!) {
+  deletePost(postId: $postId) {
+    id
+    message
+  }
+}
+mutation CreateComment($postId: ID!, $text: String!) {
+  createComment(postId: $postId, text: $text) {
+    id
+    text
+    commentedBy {
+      id
+      fullName
+      userName
+      profileImageURL
+    }
+  }
+}

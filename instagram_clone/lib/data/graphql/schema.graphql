@@ -58,6 +58,7 @@ type FeedPost {
   likeCount: Int!
   commentCount: Int!
   mediaUrl: [String!]!
+  liked: Boolean!
 }
 
 enum PostMediaType {
@@ -124,8 +125,8 @@ type Mutation {
   createUser(data: CreateUserData!): User
   createPost(data: CreatePostData!): Post
   deletePost(postId: ID!): DeletePostPayload
-  likePost(postId: ID!): LikePostPayload
-  unLikePost(postId: ID!): LikePostPayload
+  likePost(postId: ID!): FeedPost
+  unLikePost(postId: ID!): FeedPost
   createComment(postId: ID!, text: String!): Comment
   deleteComment(commentId: ID!): StatusResponse
 }

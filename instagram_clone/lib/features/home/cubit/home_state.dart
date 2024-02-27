@@ -4,7 +4,7 @@ part of 'home_cubit.dart';
 class HomeState with _$HomeState {
   const factory HomeState({
     required bool isLoading,
-    required List<Query$GetFeeds$getFeeds> posts,
+    required List<FeedPost> posts,
   }) = _HomeState;
 
   factory HomeState.initial() => const HomeState(

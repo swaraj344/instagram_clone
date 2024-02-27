@@ -1644,6 +1644,13 @@ const documentNodeQueryGetFeeds = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'liked'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -1786,6 +1793,7 @@ class Query$GetFeeds$getFeeds {
     required this.mediaUrl,
     required this.user,
     required this.updatedAt,
+    required this.liked,
     this.$__typename = 'FeedPost',
   });
 
@@ -1797,6 +1805,7 @@ class Query$GetFeeds$getFeeds {
     final l$mediaUrl = json['mediaUrl'];
     final l$user = json['user'];
     final l$updatedAt = json['updatedAt'];
+    final l$liked = json['liked'];
     final l$$__typename = json['__typename'];
     return Query$GetFeeds$getFeeds(
       id: (l$id as String),
@@ -1808,6 +1817,7 @@ class Query$GetFeeds$getFeeds {
       user: Query$GetFeeds$getFeeds$user.fromJson(
           (l$user as Map<String, dynamic>)),
       updatedAt: (l$updatedAt as String),
+      liked: (l$liked as bool),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1825,6 +1835,8 @@ class Query$GetFeeds$getFeeds {
   final Query$GetFeeds$getFeeds$user user;
 
   final String updatedAt;
+
+  final bool liked;
 
   final String $__typename;
 
@@ -1844,6 +1856,8 @@ class Query$GetFeeds$getFeeds {
     _resultData['user'] = l$user.toJson();
     final l$updatedAt = updatedAt;
     _resultData['updatedAt'] = l$updatedAt;
+    final l$liked = liked;
+    _resultData['liked'] = l$liked;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1858,6 +1872,7 @@ class Query$GetFeeds$getFeeds {
     final l$mediaUrl = mediaUrl;
     final l$user = user;
     final l$updatedAt = updatedAt;
+    final l$liked = liked;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -1867,6 +1882,7 @@ class Query$GetFeeds$getFeeds {
       Object.hashAll(l$mediaUrl.map((v) => v)),
       l$user,
       l$updatedAt,
+      l$liked,
       l$$__typename,
     ]);
   }
@@ -1922,6 +1938,11 @@ class Query$GetFeeds$getFeeds {
     if (l$updatedAt != lOther$updatedAt) {
       return false;
     }
+    final l$liked = liked;
+    final lOther$liked = other.liked;
+    if (l$liked != lOther$liked) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1956,6 +1977,7 @@ abstract class CopyWith$Query$GetFeeds$getFeeds<TRes> {
     List<String>? mediaUrl,
     Query$GetFeeds$getFeeds$user? user,
     String? updatedAt,
+    bool? liked,
     String? $__typename,
   });
   CopyWith$Query$GetFeeds$getFeeds$user<TRes> get user;
@@ -1982,6 +2004,7 @@ class _CopyWithImpl$Query$GetFeeds$getFeeds<TRes>
     Object? mediaUrl = _undefined,
     Object? user = _undefined,
     Object? updatedAt = _undefined,
+    Object? liked = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetFeeds$getFeeds(
@@ -2003,6 +2026,9 @@ class _CopyWithImpl$Query$GetFeeds$getFeeds<TRes>
         updatedAt: updatedAt == _undefined || updatedAt == null
             ? _instance.updatedAt
             : (updatedAt as String),
+        liked: liked == _undefined || liked == null
+            ? _instance.liked
+            : (liked as bool),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -2029,6 +2055,7 @@ class _CopyWithStubImpl$Query$GetFeeds$getFeeds<TRes>
     List<String>? mediaUrl,
     Query$GetFeeds$getFeeds$user? user,
     String? updatedAt,
+    bool? liked,
     String? $__typename,
   }) =>
       _res;

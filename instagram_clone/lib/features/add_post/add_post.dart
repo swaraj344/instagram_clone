@@ -47,6 +47,7 @@ class AddPostScreen extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     )
                   : CustomScrollView(
+                      controller: _addPostCubit.scrollController,
                       slivers: [
                         SliverToBoxAdapter(
                           child: AspectRatio(

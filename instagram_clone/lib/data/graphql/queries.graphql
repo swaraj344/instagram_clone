@@ -33,5 +33,6 @@ query GetFeeds {
       profileImageURL
     }
     updatedAt
+    liked
   }
 }

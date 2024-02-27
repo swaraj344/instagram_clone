@@ -1,7 +1,7 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { prismaClient } from "../lib/db";
-import { Post, PostMediaType } from "@prisma/client";
+import { LikeType, Post, PostMediaType } from "@prisma/client";
 import { DeletePostPayload } from "../functions/graphql/post/interfaces";
 
 class PostServices {
@@ -39,7 +39,6 @@ class PostServices {
     userId: string;
   }): Promise<Post> {
     const cloudFrontDomain = process.env.CLOUD_FRONT_DOMAIN as string;
-    console.log(cloudFrontDomain);
 
     const post = await prismaClient.post.create({
       data: {
@@ -60,7 +59,7 @@ class PostServices {
         },
       },
     });
-    console.log(post);
+
     return post;
   }
 
@@ -99,7 +98,6 @@ class PostServices {
         },
       })
       .then((e) => {
-        console.log(e);
         return e;
       });
   }
@@ -145,10 +143,34 @@ class PostServices {
         data: { likeCount: { increment: 1 } },
       });
 
-      return like;
-    });
+      const post = await prisma.post.findUnique({
+        where: { id: postId },
+        include: {
+          PostActivity: true,
+          user: true,
+          media: true,
+        },
+      });
 
-    console.log(result);
+      const feedPost = {
+        id: post!.id,
+        caption: post?.caption,
+        createdAt: post?.createdAt,
+        updatedAt: post?.updatedAt,
+        user: {
+          id: post?.userId,
+          fullName: post?.user.fullName,
+          userName: post?.user.userName,
+          profileImageURL: post?.user.profileImageUrl,
+        },
+        likeCount: post?.PostActivity?.likeCount || 0,
+        commentCount: post?.PostActivity?.commentCount || 0,
+        mediaUrl: post!.media.map((e) => e.url),
+        liked: true,
+      };
+
+      return feedPost;
+    });
 
     return result;
   }
@@ -173,6 +195,33 @@ class PostServices {
         where: { postId: postId },
         data: { likeCount: { decrement: 1 } },
       });
+
+      const post = await prisma.post.findUnique({
+        where: { id: postId },
+        include: {
+          PostActivity: true,
+          user: true,
+          media: true,
+        },
+      });
+
+      const feedPost = {
+        id: post!.id,
+        caption: post?.caption,
+        createdAt: post?.createdAt,
+        updatedAt: post?.updatedAt,
+        user: {
+          id: post?.userId,
+          fullName: post?.user.fullName,
+          userName: post?.user.userName,
+          profileImageURL: post?.user.profileImageUrl,
+        },
+        likeCount: post?.PostActivity?.likeCount || 0,
+        commentCount: post?.PostActivity?.commentCount || 0,
+        mediaUrl: post!.media.map((e) => e.url),
+        liked: false,
+      };
+      return feedPost;
     });
 
     return result;
@@ -199,8 +248,6 @@ class PostServices {
         where: { postId: postId },
         data: { commentCount: { increment: 1 } },
       });
-
-      console.log(comment);
 
       // Return the created comment
       return comment;
@@ -308,6 +355,20 @@ class PostServices {
       include: { PostActivity: true, user: true, media: true }, // Include related data as needed
     });
 
+    const likedPostids = await prismaClient.like
+      .findMany({
+        where: {
+          likedById: userId,
+          likeType: LikeType.POST,
+        },
+        select: {
+          parentId: true,
+        },
+      })
+      .then((e) => {
+        return e.map((e) => e.parentId);
+      });
+
     // Combine followed posts and discovery posts
     const feedPosts = [...followedPosts, ...discoveryPosts].map((e) => {
       return {
@@ -324,6 +385,7 @@ class PostServices {
         likeCount: e.PostActivity?.likeCount || 0,
         commentCount: e.PostActivity?.commentCount || 0,
         mediaUrl: e.media.map((e) => e.url),
+        liked: likedPostids.includes(e.id) || false,
       };
     });
 

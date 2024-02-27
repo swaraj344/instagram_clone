@@ -33,6 +33,7 @@ export const types = `#graphql
     likeCount: Int!
     commentCount: Int!
     mediaUrl: [String!]!
+    liked: Boolean!
     }
 
     enum PostMediaType {

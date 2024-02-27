@@ -114,6 +114,7 @@ class _FeedsScreenState extends State<FeedsScreen> {
                   itemBuilder: (context, index) {
                     return PostWidget(
                       post: state.posts[index],
+                      homeCubit: widget._homeCubit,
                     );
                   },
                 );

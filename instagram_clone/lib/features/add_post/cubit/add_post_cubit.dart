@@ -20,6 +20,7 @@ part 'add_post_cubit.freezed.dart';
 class AddPostCubit extends Cubit<AddPostState> {
   final IAddPostServices _addPostServices;
   Alignment alignment = Alignment.center;
+  final ScrollController scrollController = ScrollController();
   AddPostCubit(this._addPostServices) : super(AddPostState.initial()) {
     getLocalMedia();
   }
@@ -69,6 +70,11 @@ class AddPostCubit extends Cubit<AddPostState> {
 
   handleImageChange(Medium value) {
     emit(state.copyWith(selectedImage: value));
+    if (scrollController.hasClients) {
+      scrollController.animateTo(0,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.decelerate);
+    }
   }
 
   handleNextClick() async {
@@ -121,6 +127,12 @@ class AddPostCubit extends Cubit<AddPostState> {
       });
       EasyLoading.dismiss();
     }
+  }
+
+  @override
+  Future<void> close() {
+    emit(AddPostState.initial());
+    return super.close();
   }
 }
 

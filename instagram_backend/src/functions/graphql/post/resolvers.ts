@@ -19,7 +19,6 @@ const queries = {
     if (!ctx.user) return null;
 
     const posts = await PostServices.generateFeedForUser(ctx.user.id, 50);
-    console.log(posts);
 
     return posts;
   },
@@ -100,7 +99,6 @@ const posts = {
     return PostServices.getLikesByPostId(post.id);
   },
   PostActivity: async (post: Post) => {
-    console.log("post activity called");
     // Fetch PostActivity associated with the post from the database
     return PostServices.getPostActivityByPostId(post.id);
   },
@@ -108,7 +106,6 @@ const posts = {
 
 const comments = {
   commentedBy: async (comment: Comment) => {
-    console.log(comment);
     return await UserServices.getUserById(comment.commentedById);
   },
 };

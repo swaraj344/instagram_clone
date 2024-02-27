@@ -6,12 +6,13 @@ import 'package:instagram_clone/core/colors.dart';
 import 'package:instagram_clone/core/extensions.dart';
 import 'package:instagram_clone/core/widgets/components/post/post_info.dart';
 import 'package:instagram_clone/core/widgets/profile_avatar.dart';
-
-import '../../../../data/graphql/graphql.dart';
+import 'package:instagram_clone/data/db/database.dart';
+import 'package:instagram_clone/features/home/cubit/home_cubit.dart';
 
 class PostWidget extends StatefulWidget {
-  final Query$GetFeeds$getFeeds post;
-  const PostWidget({super.key, required this.post});
+  final FeedPost post;
+  final HomeCubit homeCubit;
+  const PostWidget({super.key, required this.post, required this.homeCubit});
 
   @override
   State<PostWidget> createState() => _PostWidgetState();
@@ -52,14 +53,13 @@ class _PostWidgetState extends State<PostWidget>
                 radius: 14,
                 padding: 4,
                 showBorder: true,
-                image: widget.post.user.profileImageURL == null
+                image: widget.post.profileImageURL == null
                     ? null
-                    : CachedNetworkImageProvider(
-                        widget.post.user.profileImageURL!),
+                    : CachedNetworkImageProvider(widget.post.profileImageURL!),
               ),
               8.width,
               Text(
-                widget.post.user.userName,
+                widget.post.userName,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 12.sp,
@@ -78,6 +78,13 @@ class _PostWidgetState extends State<PostWidget>
           ),
         ),
         LikeAnimationWrapper(
+          onDoubleTap: () {
+            if (!widget.post.liked) {
+              widget.homeCubit.likePost(widget.post.id);
+            } else {
+              widget.homeCubit.unLikePost(widget.post.id);
+            }
+          },
           animationController: _animationController,
           child: AspectRatio(
             aspectRatio: 1,
@@ -90,6 +97,7 @@ class _PostWidgetState extends State<PostWidget>
         PostInfoWidget(
           likeAnimationController: _animationController,
           post: widget.post,
+          homeCubit: widget.homeCubit,
         ),
       ],
     );
@@ -99,8 +107,12 @@ class _PostWidgetState extends State<PostWidget>
 class LikeAnimationWrapper extends StatefulWidget {
   final Widget child;
   final AnimationController animationController;
+  final VoidCallback onDoubleTap;
   const LikeAnimationWrapper(
-      {super.key, required this.child, required this.animationController});
+      {super.key,
+      required this.child,
+      required this.animationController,
+      required this.onDoubleTap});
 
   @override
   State<LikeAnimationWrapper> createState() => _LikeAnimationWrapperState();
@@ -157,6 +169,7 @@ class _LikeAnimationWrapperState extends State<LikeAnimationWrapper> {
                     }
 
                     _animationController.forward();
+                    widget.onDoubleTap();
                   },
                   child: child),
               ScaleTransition(

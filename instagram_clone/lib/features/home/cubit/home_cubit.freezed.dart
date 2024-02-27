@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeState {
   bool get isLoading => throw _privateConstructorUsedError;
-  List<Query$GetFeeds$getFeeds> get posts => throw _privateConstructorUsedError;
+  List<FeedPost> get posts => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
-  $Res call({bool isLoading, List<Query$GetFeeds$getFeeds> posts});
+  $Res call({bool isLoading, List<FeedPost> posts});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       posts: null == posts
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
-              as List<Query$GetFeeds$getFeeds>,
+              as List<FeedPost>,
     ) as $Val);
   }
 }
@@ -69,7 +69,7 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       __$$HomeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, List<Query$GetFeeds$getFeeds> posts});
+  $Res call({bool isLoading, List<FeedPost> posts});
 }
 
 /// @nodoc
@@ -94,7 +94,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       posts: null == posts
           ? _value._posts
           : posts // ignore: cast_nullable_to_non_nullable
-              as List<Query$GetFeeds$getFeeds>,
+              as List<FeedPost>,
     ));
   }
 }
@@ -103,15 +103,14 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 
 class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
-      {required this.isLoading,
-      required final List<Query$GetFeeds$getFeeds> posts})
+      {required this.isLoading, required final List<FeedPost> posts})
       : _posts = posts;
 
   @override
   final bool isLoading;
-  final List<Query$GetFeeds$getFeeds> _posts;
+  final List<FeedPost> _posts;
   @override
-  List<Query$GetFeeds$getFeeds> get posts {
+  List<FeedPost> get posts {
     if (_posts is EqualUnmodifiableListView) return _posts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_posts);
@@ -146,12 +145,12 @@ class _$HomeStateImpl implements _HomeState {
 abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {required final bool isLoading,
-      required final List<Query$GetFeeds$getFeeds> posts}) = _$HomeStateImpl;
+      required final List<FeedPost> posts}) = _$HomeStateImpl;
 
   @override
   bool get isLoading;
   @override
-  List<Query$GetFeeds$getFeeds> get posts;
+  List<FeedPost> get posts;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>

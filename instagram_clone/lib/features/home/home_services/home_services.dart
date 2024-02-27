@@ -17,4 +17,13 @@ class HomeServices {
     }
     return [];
   }
+
+  likePost(String postId) async {
+    final result = await _qlClient
+        .mutate$LikePost(Options$Mutation$LikePost(
+            variables: Variables$Mutation$LikePost(postId: postId)))
+        .then((value) {
+      return value.parsedData?.likePost;
+    });
+  }
 }
